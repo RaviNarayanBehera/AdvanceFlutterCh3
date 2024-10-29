@@ -11,17 +11,26 @@ class HomePage extends StatelessWidget {
         title: const Text('My App'),
         centerTitle: true,
       ),
-      body: StreamBuilder(stream: Connectivity().onConnectivityChanged, builder:
-      (context, snapshot) {
-        if(snapshot.data!.contains(ConnectivityResult.mobile))
-          {
-              return const Center(child: CircularProgressIndicator());
+      body: StreamBuilder(
+        stream: Connectivity().onConnectivityChanged,
+        builder: (context, snapshot) {
+          if (snapshot.data!.contains(ConnectivityResult.mobile)) {
+            return const Center(child: Text('Back Online'));
+          } else {
+            return Center(
+              child: Container(
+                height: 780,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/offline.gif'),
+                      fit: BoxFit.fitHeight),
+                ),
+              ),
+            );
           }
-        else
-          {
-            return const Center(child: CircularProgressIndicator(backgroundColor: Colors.black,));
-          }
-      },),
+        },
+      ),
     );
   }
 }
