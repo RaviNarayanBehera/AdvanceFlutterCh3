@@ -8,14 +8,24 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My App'),
+        backgroundColor: Colors.black,
+        title: const Text('My App',style: TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
       body: StreamBuilder(
         stream: Connectivity().onConnectivityChanged,
         builder: (context, snapshot) {
           if (snapshot.data!.contains(ConnectivityResult.mobile)) {
-            return const Center(child: Text('Back Online'));
+            return  Center(child: Column(
+              children: [
+                Container(
+                  height: 500,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/online.gif')),),
+                ),
+                const Text('Connected to Internet',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+              ],
+            ));
           } else {
             return Center(
               child: Container(
